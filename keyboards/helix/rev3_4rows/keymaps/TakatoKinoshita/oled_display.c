@@ -21,9 +21,9 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
   _QWERTY = 0,
-  _LOWER,
-  _RAISE,
-  _ADJUST
+  _NUM,
+  _FUNC,
+  _RAISE
 };
 
 #ifdef OLED_ENABLE
@@ -51,14 +51,14 @@ void render_status(void) {
       case _QWERTY:
           oled_write_P(PSTR("Default\n"), false);
           break;
+      case _NUM:
+          oled_write_P(PSTR("Number\n"), false);
+          break;
+      case _FUNC:
+          oled_write_P(PSTR("Function\n"), false);
+          break;
       case _RAISE:
           oled_write_P(PSTR("Raise\n"), false);
-          break;
-      case _LOWER:
-          oled_write_P(PSTR("Lower\n"), false);
-          break;
-      case _ADJUST:
-          oled_write_P(PSTR("Adjust\n"), false);
           break;
       default:
           // Or use the write_ln shortcut over adding '\n' to the end of your string
