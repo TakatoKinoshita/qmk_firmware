@@ -110,9 +110,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
       case _RAISE:
         if (clockwise) {
-          tap_code16(ZM_IN);
+          tap_code(KC_UP);
         } else {
-          tap_code16(ZM_OUT);
+          tap_code(KC_DOWN);
         }
         break;
     }
