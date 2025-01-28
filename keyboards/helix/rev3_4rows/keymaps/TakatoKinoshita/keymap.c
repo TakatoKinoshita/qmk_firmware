@@ -70,17 +70,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+
 #define ZM_IN LCTL(MS_WHLU)
 #define ZM_OUT LCTL(MS_WHLD)
 
-//#if defined(ENCODER_MAP_ENABLE)
-//const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-//    [_QWERTY] = { ENCODER_CCW_CW(XXXXXXX, XXXXXXX), ENCODER_CCW_CW(KC_RGHT, KC_LEFT)},
-//    [_NUM]    = { ENCODER_CCW_CW(XXXXXXX, XXXXXXX), ENCODER_CCW_CW(KC_UP,   KC_DOWN)},
-//    [_FUNC]   = { ENCODER_CCW_CW(XXXXXXX, XXXXXXX), ENCODER_CCW_CW(KC_VOLU, KC_VOLD)},
-//    [_RAISE]  = { ENCODER_CCW_CW(XXXXXXX, XXXXXXX), ENCODER_CCW_CW(ZM_IN,   ZM_OUT) },
-//};
-//#endif
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { /* Left side encoder */
