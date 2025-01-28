@@ -71,10 +71,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-#define ZM_IN LCTL(MS_WHLU)
-#define ZM_OUT LCTL(MS_WHLD)
-
-
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { /* Left side encoder */
     if (clockwise) {
