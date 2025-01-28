@@ -82,51 +82,41 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else {
       tap_code(KC_PGUP);
     }
-  } else if (index == 1) {
-    if (clockwise) {
-      tap_code(KC_LEFT);
-    } else {
-      tap_code(KC_RGHT);
+  } else if (index == 1) { /* Right side encoder */
+    switch (get_highest_layer(layer_state)){
+      case _QWERTY:
+        if (clockwise) {
+          tap_code(KC_LEFT);
+        } else {
+          tap_code(KC_RGHT);
+        }
+        break;
+
+      case _NUM:
+        if (clockwise) {
+          tap_code(MS_WHLU);
+        } else {
+          tap_code(MS_WHLD);
+        }
+        break;
+
+      case _FUNC:
+        if (clockwise) {
+          tap_code(KC_VOLD);
+        } else {
+          tap_code(KC_VOLU);
+        }
+        break;
+
+      case _RAISE:
+        if (clockwise) {
+          tap_code16(ZM_IN);
+        } else {
+          tap_code16(ZM_OUT);
+        }
+        break;
     }
   }
-    
-//  if (index == 1) { /* Right side encoder */
-//    switch (get_highest_layer(layer_state)){
-//      case _QWERTY:
-//        if (clockwise) {
-//          tap_code(KC_LEFT);
-//        } else {
-//          tap_code(KC_RGHT);
-//        }
-//        break;
-//
-//      case _NUM:
-//        if (clockwise) {
-//          tap_code(MS_WHLU);
-//        } else {
-//          tap_code(MS_WHLD);
-//        }
-//        break;
-//
-//      case _FUNC:
-//        if (clockwise) {
-//          tap_code(KC_VOLU);
-//        } else {
-//          tap_code(KC_VOLD);
-//        }
-//        break;
-//
-//      case _RAISE:
-//        if (clockwise) {
-//          tap_code16(C(MS_WHLU));
-//        } else {
-//          tap_code16(C(MS_WHLD));
-//        }
-//        break;
-//    }
-//
-//    return true;
-//  }
 
   return false;
 }
