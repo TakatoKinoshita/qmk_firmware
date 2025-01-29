@@ -37,7 +37,10 @@ enum layer_names {
 #define SFT_ALT S(KC_LALT)
 #define SFT_TAB S(KC_TAB)
 #define SFT_ENT S(KC_ENT)
-#define SFT_CTL S(KC_LCTL)
+
+#define CTL_ALT C(KC_LALT)
+#define CTL_TAB C(KC_TAB)
+#define CTL_ENT C(KC_ENT)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -74,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                   _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, 
     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_UNDS,                   KC_PLUS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUES, 
     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_COLN,                   KC_DQUO, _______, _______, KC_LABK, KC_RABK, KC_PIPE, 
-    _______, SFT_ALT, SFT_TAB, KC_SPC,  SFT_CTL, SFT_ENT, _______, _______, KC_DEL,  KC_LSFT, KC_LCBR, KC_RCBR, KC_TILD, _______
+    _______, CTL_ALT, CTL_TAB, KC_SPC,  KC_RPRN, CTL_ENT, _______, _______, KC_DEL,  KC_LSFT, KC_LCBR, KC_RCBR, KC_TILD, _______
   )
 
 };
