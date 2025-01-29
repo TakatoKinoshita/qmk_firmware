@@ -133,43 +133,49 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   return false;
 }
 
-const rgblight_segment_t PROGMEM rgb_qwerty[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,  1,  HSV_WHITE},
+const rgblight_segment_t PROGMEM rgb_default[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0,  1,  HSV_OFF},
     {1,  49, HSV_RED}
 );
 
+const rgblight_segment_t PROGMEM rgb_qwerty[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0,  1,  HSV_OFF}
+);
+
 const rgblight_segment_t PROGMEM rgb_meta[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,  50, HSV_RED}
+    {0,  1,  HSV_RED}
 );
 
 const rgblight_segment_t PROGMEM rgb_num[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,  6,  HSV_BLUE},
-    {6,  5,  HSV_ORANGE},
-    {11, 2,  HSV_BLUE},
-    {13, 5,  HSV_ORANGE},
-    {18, 32, HSV_BLUE}
+    {6,  5,  HSV_BLUE},
+    {13, 5,  HSV_BLUE}
 );
 
 const rgblight_segment_t PROGMEM rgb_func[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,  6,  HSV_CHARTREUSE}, 
-    {6,  5,  HSV_PURPLE},
-    {11, 2,  HSV_CHARTREUSE},
-    {13, 5,  HSV_PURPLE},
-    {18, 16, HSV_CHARTREUSE},
-    {34, 2,  HSV_PURPLE},
-    {36, 3,  HSV_CHARTREUSE},
-    {39, 1,  HSV_CORAL},
-    {40, 5,  HSV_CHARTREUSE},
-    {45, 3,  HSV_CORAL},
-    {48, 2,  HSV_CHARTREUSE}
+    {6,  5,  HSV_CHARTREUSE},
+    {13, 5,  HSV_CHARTREUSE},
+    {34, 2,  HSV_CHARTREUSE},
+    {39, 1,  HSV_ORANGE},
+    {45, 3,  HSV_ORANGE}
 );
 
 const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 50, HSV_RED}
+    {1,  5,  HSV_MAGENTA},
+    {6,  5,  HSV_BLUE},
+    {11, 2,  HSV_CORAL},
+    {13, 5,  HSV_BLUE},
+    {19, 2,  HSV_CORAL},
+    {23, 1,  HSV_CORAL},
+    {26, 5,  HSV_MAGENTA},
+    {31, 1,  HSV_CORAL},
+    {32, 4,  HSV_ORANGE},
+    {36, 2,  HSV_CORAL},
+    {40, 3,  HSV_CORAL},
+    {44, 5,  HSV_CORAL}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    rgb_qwerty, rgb_meta, rgb_num, rgb_func, rgb_raise
+    rgb_default, rgb_qwerty, rgb_meta, rgb_num, rgb_func, rgb_raise
 );
 
 void keyboard_post_init_user(void) {
@@ -177,12 +183,17 @@ void keyboard_post_init_user(void) {
     rgblight_layers = rgb_layers;
 }
 
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+  rgblight_set_layer_state(0, layer_state_cmp(state, _QWERTY));
+  return state;
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-  rgblight_set_layer_state(_QWERTY, layer_state_cmp(state, _QWERTY));
-  rgblight_set_layer_state(_META, layer_state_cmp(state, _META));
-  rgblight_set_layer_state(_NUM, layer_state_cmp(state, _NUM));
-  rgblight_set_layer_state(_FUNC, layer_state_cmp(state, _FUNC));
-  rgblight_set_layer_state(_RAISE, layer_state_cmp(state, _RAISE));
+  rgblight_set_layer_state(1, layer_state_cmp(state, _QWERTY));
+  rgblight_set_layer_state(2, layer_state_cmp(state, _META));
+  rgblight_set_layer_state(3, layer_state_cmp(state, _NUM));
+  rgblight_set_layer_state(4, layer_state_cmp(state, _FUNC));
+  rgblight_set_layer_state(5, layer_state_cmp(state, _RAISE));
   return state;
 }
 
