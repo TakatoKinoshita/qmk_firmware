@@ -159,7 +159,8 @@ const rgblight_segment_t PROGMEM rgb_func[] = RGBLIGHT_LAYER_SEGMENTS(
     {13, 5,  HSV_CHARTREUSE},
     {34, 2,  HSV_CHARTREUSE},
     {39, 1,  HSV_ORANGE},
-    {45, 3,  HSV_ORANGE}
+    {45, 3,  HSV_ORANGE},
+    {49, 1,  HSV_CORAL}
 );
 
 const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -167,7 +168,8 @@ const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
     {6,  5,  HSV_BLUE},
     {13, 5,  HSV_BLUE},
     {26, 5,  HSV_MAGENTA},
-    {32, 4,  HSV_ORANGE}
+    {32, 4,  HSV_ORANGE},
+    {47, 1,  HSV_CHARTREUSE}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
