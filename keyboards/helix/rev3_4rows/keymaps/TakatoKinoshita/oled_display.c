@@ -21,6 +21,7 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
   _QWERTY = 0,
+  _META,
   _NUM,
   _FUNC,
   _RAISE
@@ -50,6 +51,9 @@ void render_status(void) {
   switch (get_highest_layer(layer_state)) {
       case _QWERTY:
           oled_write_P(PSTR("Default\n"), false);
+          break;
+      case _META:
+          oled_write_P(PSTR("Meta\n"), false);
           break;
       case _NUM:
           oled_write_P(PSTR("Number\n"), false);

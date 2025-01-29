@@ -19,12 +19,14 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
   _QWERTY = 0,
+  _META,
   _NUM,
   _FUNC,
   _RAISE
 };
 
 
+#define TG_META TG(_META)
 #define TG_NUM TG(_NUM)
 #define TG_FUNC TG(_FUNC)
 #define UP_SPC LT(_RAISE, KC_SPC)
@@ -41,6 +43,13 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
+    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    XXXXXXX,                   KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    
+    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MINS,                   KC_EQL,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SLSH, 
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SCLN,                   KC_QUOT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, 
+    TG_NUM,  KC_LALT, KC_TAB,  UP_SPC,  SC_LSPO, KC_ENT,  TGL_IME, XXXXXXX, KC_BSPC, SC_RCPC, UP_LBRC, KC_RBRC, KC_GRV,  TG_FUNC 
+  ),
+
+  [_META] = LAYOUT(
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LGUI,                   KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MINS,                   KC_EQL,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SLSH, 
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SCLN,                   KC_QUOT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, 
@@ -71,6 +80,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+const uint16_t PROGMEM combo[] = {TG_NUM, TG_FUNC, COMBO_END};
+combo_t key_combos[] = {
+  COMBO(combo, TG_META)
+};
+
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { /* Left side encoder */
     if (clockwise) {
@@ -81,6 +96,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   } else if (index == 1) { /* Right side encoder */
     switch (get_highest_layer(layer_state)){
       case _QWERTY:
+      case _META:
         if (clockwise) {
           tap_code(KC_LEFT);
         } else {
@@ -118,6 +134,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 const rgblight_segment_t PROGMEM rgb_qwerty[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0,  1,  HSV_WHITE},
+    {1,  49, HSV_RED}
+);
+
+const rgblight_segment_t PROGMEM rgb_meta[] = RGBLIGHT_LAYER_SEGMENTS(
     {0,  50, HSV_RED}
 );
 
@@ -148,7 +169,7 @@ const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    rgb_qwerty, rgb_num, rgb_func, rgb_raise
+    rgb_qwerty, rgb_meta, rgb_num, rgb_func, rgb_raise
 );
 
 void keyboard_post_init_user(void) {
@@ -158,6 +179,7 @@ void keyboard_post_init_user(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   rgblight_set_layer_state(_QWERTY, layer_state_cmp(state, _QWERTY));
+  rgblight_set_layer_state(_META, layer_state_cmp(state, _META));
   rgblight_set_layer_state(_NUM, layer_state_cmp(state, _NUM));
   rgblight_set_layer_state(_FUNC, layer_state_cmp(state, _FUNC));
   rgblight_set_layer_state(_RAISE, layer_state_cmp(state, _RAISE));
