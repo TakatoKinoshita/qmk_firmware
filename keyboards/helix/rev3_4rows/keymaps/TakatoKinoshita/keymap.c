@@ -160,7 +160,7 @@ const rgblight_segment_t PROGMEM rgb_func[] = RGBLIGHT_LAYER_SEGMENTS(
     {34, 2,  HSV_CHARTREUSE},
     {39, 1,  HSV_ORANGE},
     {45, 3,  HSV_ORANGE},
-    {49, 1,  HSV_CORAL}
+    {48, 1,  HSV_CORAL}
 );
 
 const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
