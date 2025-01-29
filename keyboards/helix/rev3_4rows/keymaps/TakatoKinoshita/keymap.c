@@ -27,9 +27,9 @@ enum layer_names {
 
 
 #define TG_META TG(_META)
-#define TG_NUM TG(_NUM)
+#define TG_NUM  TG(_NUM)
 #define TG_FUNC TG(_FUNC)
-#define UP_SPC LT(_RAISE, KC_SPC)
+#define UP_SPC  LT(_RAISE, KC_SPC)
 #define UP_LBRC LT(_RAISE, KC_LBRC)
 
 #define TGL_IME C(KC_SPC)
