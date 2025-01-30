@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                   _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, 
     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_UNDS,                   KC_PLUS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUES, 
     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_COLN,                   KC_DQUO, _______, _______, KC_LABK, KC_RABK, KC_PIPE, 
-    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_CAPS, DT_LCP,  DT_RCP,  KC_TILD, _______
+    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_LCTL, DT_LCP,  DT_RCP,  KC_TILD, _______
   )
 
 };
@@ -210,8 +210,7 @@ const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
     {13, 5,  HSV_BLUE},
     {22, 1,  HSV_CHARTREUSE},
     {26, 5,  HSV_MAGENTA},
-    {32, 4,  HSV_ORANGE},
-    {47, 1,  HSV_CHARTREUSE}
+    {32, 4,  HSV_ORANGE}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
