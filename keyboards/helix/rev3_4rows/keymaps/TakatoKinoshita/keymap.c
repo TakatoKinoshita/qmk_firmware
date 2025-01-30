@@ -26,6 +26,47 @@ enum layer_names {
 };
 
 
+enum tap_dance {
+  _DT_LCP = 0,
+  _DT_RCP,
+  _DT_MIUN,
+  _DT_CLN,
+  _DT_EQPL,
+  _DT_SLQU,
+  _DT_QUOT,
+  _DT_CMLA,
+  _DT_DTRA,
+  _DT_BSPI,
+  _DT_GRTL,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+  [_DT_LCP ] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_LPRN),
+  [_DT_RCP ] = ACTION_TAP_DANCE_DOUBLE(KC_RCBR, KC_RPRN),
+  [_DT_MIUN] = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
+  [_DT_CLN ] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
+  [_DT_EQPL] = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PLUS),
+  [_DT_SLQU] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_QUES),
+  [_DT_QUOT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
+  [_DT_CMLA] = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_LABK),
+  [_DT_DTRA] = ACTION_TAP_DANCE_DOUBLE(KC_DOT,  KC_RABK),
+  [_DT_BSPI] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_PIPE),
+  [_DT_GRTL] = ACTION_TAP_DANCE_DOUBLE(KC_GRV,  KC_TILD),
+};
+
+#define DT_LCP  TD(_DT_LCP)
+#define DT_RCP  TD(_DT_RCP)
+#define DT_MIUN TD(_DT_MIUN)
+#define DT_CLN  TD(_DT_CLN)
+#define DT_EQPL TD(_DT_EQPL)
+#define DT_SLQU TD(_DT_SLQU)
+#define DT_QUOT TD(_DT_QUOT)
+#define DT_CMLA TD(_DT_CMLA)
+#define DT_DTRA TD(_DT_DTRA)
+#define DT_BSPI TD(_DT_BSPI)
+#define DT_GRTL TD(_DT_GRTL)
+
+
 #define TG_META TG(_META)
 #define TG_NUM  TG(_NUM)
 #define TG_FUNC TG(_FUNC)
@@ -47,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    XXXXXXX,                   KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    
-    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MINS,                   KC_EQL,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SLSH, 
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SCLN,                   KC_QUOT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, 
-    TG_NUM,  KC_LALT, KC_TAB,  UP_SPC,  KC_LSFT, KC_ENT,  TGL_IME, XXXXXXX, KC_BSPC, KC_LCTL, UP_LBRC, KC_RBRC, KC_GRV,  TG_FUNC 
+    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    DT_MIUN,                   DT_EQPL, KC_H,    KC_J,    KC_K,    KC_L,    DT_SLQU, 
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    DT_CLN,                    DT_QUOT, KC_N,    KC_M,    DT_CMLA, DT_DTRA, DT_BSPI, 
+    TG_NUM,  KC_LALT, KC_TAB,  UP_SPC,  KC_LSFT, KC_ENT,  TGL_IME, XXXXXXX, KC_BSPC, KC_LCTL, UP_LBRC, KC_RBRC, DT_GRTL, TG_FUNC 
   ),
 
   [_META] = LAYOUT(
@@ -77,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                   _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, 
     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_UNDS,                   KC_PLUS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUES, 
     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_COLN,                   KC_DQUO, _______, _______, KC_LABK, KC_RABK, KC_PIPE, 
-    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_CAPS, KC_LCBR, KC_RCBR, KC_TILD, _______
+    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_CAPS, DT_LCP,  DT_RCP,  KC_TILD, _______
   )
 
 };
