@@ -26,6 +26,23 @@ enum layer_names {
 };
 
 
+#define TG_META TG(_META)
+#define TG_NUM  TG(_NUM)
+#define TG_FUNC TG(_FUNC)
+#define UP_SPC  LT(_RAISE, KC_SPC)
+#define UP_LBRC LT(_RAISE, KC_LBRC)
+
+#define TGL_IME C(KC_SPC)
+
+#define SFT_ALT S(KC_LALT)
+#define SFT_TAB S(KC_TAB)
+#define SFT_ENT S(KC_ENT)
+
+#define CTL_ALT C(KC_LALT)
+#define CTL_TAB C(KC_TAB)
+#define CTL_ENT C(KC_ENT)
+
+
 enum tap_dance {
   _DT_LCP = 0,
   _DT_RCP,
@@ -65,23 +82,6 @@ tap_dance_action_t tap_dance_actions[] = {
 #define DT_DTRA TD(_DT_DTRA)
 #define DT_BSPI TD(_DT_BSPI)
 #define DT_GRTL TD(_DT_GRTL)
-
-
-#define TG_META TG(_META)
-#define TG_NUM  TG(_NUM)
-#define TG_FUNC TG(_FUNC)
-#define UP_SPC  LT(_RAISE, KC_SPC)
-#define UP_LBRC LT(_RAISE, KC_LBRC)
-
-#define TGL_IME C(KC_SPC)
-
-#define SFT_ALT S(KC_LALT)
-#define SFT_TAB S(KC_TAB)
-#define SFT_ENT S(KC_ENT)
-
-#define CTL_ALT C(KC_LALT)
-#define CTL_TAB C(KC_TAB)
-#define CTL_ENT C(KC_ENT)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
