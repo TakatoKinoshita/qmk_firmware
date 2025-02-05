@@ -44,8 +44,8 @@ enum layer_names {
 
 
 enum tap_dance {
-  _DT_LCP = 0,
-  _DT_RCP,
+  _TD_ULBP = 0,
+  _DT_RBP,
   _DT_MIUN,
   _DT_CLN,
   _DT_EQPL,
@@ -57,9 +57,63 @@ enum tap_dance {
   _DT_GRTL,
 };
 
+typedef enum {
+  TDST_NONE = 0,
+  TDST_UNKNOWN,
+  TDST_SINGLE_TAP,
+  TDST_SINGLE_HOLD,
+  TDST_DOUBLE_TAP,
+} td_state_t;
+
+static td_state_t td_state;
+
+td_state_t cur_dance(tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (state->interrupted || !state->pressed) return TDST_SINGLE_TAP;
+    else return TDST_SINGLE_HOLD;
+  }
+
+  if (state->count == 2) return TDST_DOUBLE_TAP;
+  else return TDST_UNKNOWN;
+}
+
+void td_ulbp_finished(tap_dance_state_t *state, void *user_data) {
+  td_state = cur_dance(state);
+  switch (td_state) {
+    case TDST_SINGLE_TAP:
+      register_code16(KC_LBRC);
+      break;
+    case TDST_SINGLE_HOLD:
+      layer_on(_RAISE);
+      break;
+    case TDST_DOUBLE_TAP:
+      register_code16(KC_LPRN);
+      break;
+    default:
+      break;
+  }
+}
+
+void td_ulbp_reset(tap_dance_state_t *state, void *user_data) {
+  switch (td_state) {
+    case TDST_SINGLE_TAP:
+      unregister_code16(KC_LBRC);
+      break;
+    case TDST_SINGLE_HOLD:
+      layer_off(_RAISE);
+      break;
+    case TDST_DOUBLE_TAP:
+      unregister_code16(KC_LPRN);
+      break;
+    default:
+      break;
+  }
+  td_state = TDST_NONE;
+}
+
 tap_dance_action_t tap_dance_actions[] = {
-  [_DT_LCP ] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_LPRN),
-  [_DT_RCP ] = ACTION_TAP_DANCE_DOUBLE(KC_RCBR, KC_RPRN),
+  [_TD_ULBP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_ulbp_finished, td_ulbp_reset),
+  [_DT_RBP ] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
   [_DT_MIUN] = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
   [_DT_CLN ] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
   [_DT_EQPL] = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PLUS),
@@ -71,8 +125,8 @@ tap_dance_action_t tap_dance_actions[] = {
   [_DT_GRTL] = ACTION_TAP_DANCE_DOUBLE(KC_GRV,  KC_TILD),
 };
 
-#define DT_LCP  TD(_DT_LCP)
-#define DT_RCP  TD(_DT_RCP)
+#define TD_ULBP  TD(_TD_ULBP)
+#define DT_RBP  TD(_DT_RBP)
 #define DT_MIUN TD(_DT_MIUN)
 #define DT_CLN  TD(_DT_CLN)
 #define DT_EQPL TD(_DT_EQPL)
@@ -90,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    XXXXXXX,                   KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    DT_MIUN,                   DT_EQPL, KC_H,    KC_J,    KC_K,    KC_L,    DT_SLQU, 
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    DT_CLN,                    DT_QUOT, KC_N,    KC_M,    DT_CMLA, DT_DTRA, DT_BSPI, 
-    TG_NUM,  KC_LALT, KC_TAB,  UP_SPC,  KC_LSFT, KC_ENT,  XXXXXXX, XXXXXXX, KC_BSPC, KC_LCTL, UP_LBRC, KC_RBRC, DT_GRTL, TG_FUNC 
+    TG_NUM,  KC_LALT, KC_TAB,  UP_SPC,  KC_LSFT, KC_ENT,  XXXXXXX, XXXXXXX, KC_BSPC, KC_LCTL, TD_ULBP, DT_RBP,  DT_GRTL, TG_FUNC 
   ),
 
   [_META] = LAYOUT(
@@ -118,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                   _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, 
     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_UNDS,                   KC_PLUS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUES, 
     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_COLN,                   KC_DQUO, _______, _______, KC_LABK, KC_RABK, KC_PIPE, 
-    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_LCTL, DT_LCP,  DT_RCP,  KC_TILD, _______
+    _______, SFT_ALT, SFT_TAB, KC_SPC,  KC_F7,   SFT_ENT, _______, _______, KC_DEL,  KC_LCTL, KC_LCBR, KC_RCBR, KC_TILD, _______
   )
 
 };
