@@ -125,7 +125,7 @@ tap_dance_action_t tap_dance_actions[] = {
   [_DT_GRTL] = ACTION_TAP_DANCE_DOUBLE(KC_GRV,  KC_TILD),
 };
 
-#define TD_ULBP  TD(_TD_ULBP)
+#define TD_ULBP TD(_TD_ULBP)
 #define DT_RBP  TD(_DT_RBP)
 #define DT_MIUN TD(_DT_MIUN)
 #define DT_CLN  TD(_DT_CLN)
