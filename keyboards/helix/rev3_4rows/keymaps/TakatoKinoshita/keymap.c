@@ -178,9 +178,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-const uint16_t PROGMEM combo[] = {TG_NUM, TG_FUNC, COMBO_END};
+const uint16_t PROGMEM tg_meta[] = {TG_NUM, TG_FUNC, COMBO_END};
+const uint16_t PROGMEM kc_esc[] = {KC_J, KC_K, COMBO_END};
 combo_t key_combos[] = {
-  COMBO(combo, TG_META)
+  COMBO(tg_meta, TG_META),
+  COMBO(kc_esc, KC_ESC), 
 };
 
 
