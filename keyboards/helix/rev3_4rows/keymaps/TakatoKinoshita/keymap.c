@@ -235,9 +235,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 const rgblight_segment_t PROGMEM rgb_default[] = RGBLIGHT_LAYER_SEGMENTS(
     {0,  1,  HSV_OFF},
-    {1,  23, HSV_RED},
+    {1,  23, HSV_ORANGE},
     {24, 1,  HSV_OFF},
-    {25, 25, HSV_RED}
+    {25, 25, HSV_ORANGE}
 );
 
 const rgblight_segment_t PROGMEM rgb_qwerty[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -246,8 +246,8 @@ const rgblight_segment_t PROGMEM rgb_qwerty[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM rgb_meta[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,  1,  HSV_RED},
-    {24, 1,  HSV_RED}
+    {0,  1,  HSV_ORANGE},
+    {24, 1,  HSV_ORANGE}
 );
 
 const rgblight_segment_t PROGMEM rgb_num[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -259,8 +259,8 @@ const rgblight_segment_t PROGMEM rgb_func[] = RGBLIGHT_LAYER_SEGMENTS(
     {6,  5,  HSV_CHARTREUSE},
     {13, 5,  HSV_CHARTREUSE},
     {34, 2,  HSV_CHARTREUSE},
-    {39, 1,  HSV_ORANGE},
-    {45, 3,  HSV_ORANGE},
+    {39, 1,  HSV_RED},
+    {45, 3,  HSV_RED},
     {48, 1,  HSV_CORAL}
 );
 
@@ -270,7 +270,7 @@ const rgblight_segment_t PROGMEM rgb_raise[] = RGBLIGHT_LAYER_SEGMENTS(
     {13, 5,  HSV_BLUE},
     {22, 1,  HSV_CHARTREUSE},
     {26, 5,  HSV_MAGENTA},
-    {32, 4,  HSV_ORANGE}
+    {32, 4,  HSV_RED}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
